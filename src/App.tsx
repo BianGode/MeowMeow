@@ -1,18 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 
-function App() {
-
-let [count, setCount] = useState(0);
-function counter() {
-  setCount(count + 1)
-}
+export default function App() {
 
   return (
     <>
-      <h1 onClick={counter}>{count}</h1>
+      <h1>home</h1>
     </>
   )
 }
-
-export default App
