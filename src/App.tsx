@@ -1,23 +1,35 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { auth } from "./firebase"
+import { auth, signOutFun } from "./firebase"
 import { User, onAuthStateChanged } from 'firebase/auth'
-import firebase from 'firebase/compat/app'
-
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null)
 
   onAuthStateChanged(auth, (firebaseUser) => {
     setUser(firebaseUser)
-  })
+  });
+
+  // loader to navigate
+  const navigate = useNavigate()
+
+  const loader = async () => {
+    const user = auth.currentUser;
+    console.log('test');
+    if (!user) {
+      navigate("/cats")
+    }
+    return null;
+  };
+
   return (
-    <>
-      {
-        user !== null ?
-          <h1>{user.email}</h1>
-          : <h1>Not logged in</h1>
-      }
-    </>
+    <div>
+      <h2>App</h2>
+      <Link to="cats">Cats</Link>
+      <Link to="createcat">Cats dashoard</Link>
+
+      <Outlet/>
+    </div>
   )
 }

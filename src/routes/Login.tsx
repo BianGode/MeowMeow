@@ -1,18 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { auth, logIn } from "../firebase";
+import { redirect, useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth";
 
 export default function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
+  
 
   return (
-    <div className="loginWrapper">
+    <div className="loginPage">
       <p>Username</p>
-      <input type="text" id="" value={username} onChange={(e) => setUsername(e.target.value)}/>
+      <input type="text" id="" value={email} onChange={(e) => setEmail(e.target.value)}/>
       <p>Password</p>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
-      <h1>{username}</h1>
-      <h1>{password}</h1>
+      <button onClick={() => logIn(email, password)}>Register</button>
     </div>
   )
 }

@@ -1,26 +1,38 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import Login from "./routes/Login.tsx"
-import Register from "./routes/Register.tsx"
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import Login from "./routes/Login.tsx";
+import Register from "./routes/Register.tsx";
+import Cats from "./routes/Cats.tsx";
+import CreateCat from "./routes/CreateCat.tsx"
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>
+    element: <App />,
+    children: [
+      {
+        path: "Cats",
+        element: <Cats/>,
+      }, 
+      {
+        path: "createCat",
+        element: <CreateCat/>
+      }
+    ]
   },
   {
     path: "Login",
-    element: <Login/>
+    element: <Login />,
   },
   {
     path: "Register",
-    element: <Register/>
-  }
-])
+    element: <Register />,
+  },
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  
-    <RouterProvider router={router} />
-)
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <RouterProvider router={router} />
+);
