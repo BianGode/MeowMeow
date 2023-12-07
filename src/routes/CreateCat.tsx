@@ -1,4 +1,5 @@
 import { useState, KeyboardEvent } from "react"
+import Color from "../components/Color"
 
 export default function CreateCat() {
 
@@ -50,7 +51,7 @@ export default function CreateCat() {
           {
             colorArr.length > 0 ?
             colorArr.map((clr, inx) => {
-              return <p key={inx}>{clr + " " + inx}</p>
+              return <Color color={clr} index={inx}/>
             })
             : <p>No Colors yet</p>
           }
@@ -59,6 +60,7 @@ export default function CreateCat() {
         <input type="text" value={eyeColor} onChange={(e) => setEyeColor(e.target.value)} />
         <h3>{eyeColor}</h3>
         <p>Type of cat </p>
+        {/* maybe create a custom select component */}
         <select name="catBreeds">
         {
           catBreeds.map((breed,idx)=> {
