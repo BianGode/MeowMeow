@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { auth, signOutFun } from "./firebase";
 import { User, onAuthStateChanged } from 'firebase/auth';
-import { BrowserRouter, Link, Outlet, Route, Router, Routes, useNavigate } from 'react-router-dom';
+import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import Cats from './routes/Cats';
 import CreateCat from './routes/CreateCat';
 import Login from './routes/Login';
@@ -31,17 +31,19 @@ export default function App() {
   return (
     <div>
       <h2>App</h2>
-      <Link to="cats">Cats</Link>
-      <Link to="createcat">Cats dashoard</Link>
+      {user !== null ?
+        <div className='navLogged'>
+          <Link to="cats">Cats</Link>
+          <Link to='createcat' state={{ email: user.email }}>Create a Cat</Link>
 
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="cats" element={<Cats />} />
-        <Route path="createcat" element={<CreateCat />} />
-        <Route path='login' element={<Login />} />
-        <Route path='register' element={<Register />} />
-      </Routes>
-      <Outlet />
+        </div>
+        : <div className='navNotLogged'>
+          <Link to="login">Login</Link>
+          <Link to="register">register</Link>
+        </div>
+      }
+
+      <Outlet context={user?.email}/>
     </div>
   )
 }

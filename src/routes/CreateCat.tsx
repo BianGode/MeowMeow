@@ -1,7 +1,20 @@
 import { useState, KeyboardEvent } from "react"
 import Color from "../components/Color"
+import { auth, handleCreateACat } from "../firebase"
+import { onAuthStateChanged } from "firebase/auth"
+import { useLocation } from "react-router-dom"
 
-export default function CreateCat() {
+interface createCatProps {
+  email:string,
+}
+
+export default function CreateCat(props: createCatProps) {
+
+  // set the state props to local variable
+  // side note = I still need to research if i have to assign it to a variable or state variable
+  let { state } = useLocation()
+  let email = state.email
+
 
   const [name, setName] = useState('')
   const [birthDay, setBirthDay] = useState<string>("2000-12-12")
@@ -35,6 +48,7 @@ export default function CreateCat() {
     }
   }
 
+  
   return (
     <div className="createCatPage">
       <h1>Create a Cat!</h1>
@@ -61,13 +75,14 @@ export default function CreateCat() {
         <h3>{eyeColor}</h3>
         <p>Type of cat </p>
         {/* maybe create a custom select component */}
-        <select name="catBreeds">
+        <select name="catBreeds" value={type} onChange={(e) => setType(e.target.value)}>
         {
           catBreeds.map((breed,idx)=> {
             return <option key={idx} value={breed}>{breed}</option>
           })
         }
         </select>
+        <button onClick={() => handleCreateACat(email, name, birthDay, colorArr, eyeColor, type)}>Add Cat</button>
       </div>
     </div>
   )

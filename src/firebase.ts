@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut} from 'firebase/auth';
 import { redirect } from "react-router-dom";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -45,11 +46,59 @@ const signOutFun = async () => {
   })
 } 
 
+// function to submit the cat to the database
+async function handleCreateACat(userEmail:string, name:string, birthDay:string,colorArray:string[], eyeColor:string, breed:string) {
+  console.log(userEmail);
+  console.log(name);
+  console.log(birthDay);
+  console.log(colorArray);
+  console.log(eyeColor);
+  console.log(breed);
+  
+    await setDoc(doc(db, "Cats", userEmail), {
+      name: name,
+      birthDay: birthDay,
+      colors:colorArray,
+      eyeColor: eyeColor,
+      breed: breed,
+    }).then((res) => {
+      console.log(res);
+      console.log('added succesfully');
+    }).catch((err) => {
+      console.error(err)
+    })
+}
+
+// basic function to get all cats with email
+async function handleGetCats(userEmail:string) {
+  console.log(userEmail);
+  
+  const docRef = doc(db, "Cats", userEmail)
+  const docSnap = await getDoc(docRef)
+
+  if(docSnap.exists()) {
+    return docSnap.data()
+  } else {
+    console.log('idk why');
+    
+  }
+
+  // if(docSnap.exists()) {
+  //   return docSnap.data()
+  // } else {
+  //   console.log('no such document');
+    
+  // }
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-export {auth, register, logIn, signOutFun}
+// firestore db
+const db = getFirestore(app)
+
+export {auth, register, logIn, signOutFun, handleCreateACat, handleGetCats}
 
 // manage your cat via a dashboard
 // figure out how

@@ -8,9 +8,9 @@ import CreateCat from "./routes/CreateCat.tsx";
 import {
   BrowserRouter,
   createBrowserRouter,
-  RouterProvider,
-  Routes,
+  Link,
   Route,
+  Routes,
 } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -40,6 +40,13 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <App />
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route path="cats" element={<Cats />} />
+        <Route path="createcat" element={<CreateCat />} />
+      </Route>
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+    </Routes>
   </BrowserRouter>
 );
