@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut} from 'firebase/auth';
 import { redirect } from "react-router-dom";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -55,33 +55,41 @@ async function handleCreateACat(userEmail:string, name:string, birthDay:string,c
   console.log(eyeColor);
   console.log(breed);
   
-    await setDoc(doc(db, "Cats", userEmail), {
+    await setDoc(doc(db, "Cats", "users/" +userEmail + "/" + name), {
       name: name,
       birthDay: birthDay,
       colors:colorArray,
       eyeColor: eyeColor,
       breed: breed,
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       console.log('added succesfully');
     }).catch((err) => {
       console.error(err)
     })
 }
 
-// basic function to get all cats with email
+// basic function to get all cats with email and push them to an temporary array to I can return them to Cats.tsx
 async function handleGetCats(userEmail:string) {
-  console.log(userEmail);
   
-  const docRef = doc(db, "Cats", userEmail)
-  const docSnap = await getDoc(docRef)
+  const q = query(collection(db, "Cats/users/" + userEmail))
 
-  if(docSnap.exists()) {
-    return docSnap.data()
-  } else {
-    console.log('idk why');
+  const qSnap = await getDocs(q)
+  let tempArr = []
+  // qSnap.forEach((doc) => {
+  //   tempArr.push(doc.data())
+  //   console.log(doc.id, " ==> ", doc.data());
+  // })
+  return qSnap.docs
+  // const docRef = doc(db, "Cats", "users/" +userEmail)
+  // const docSnap = await getDoc(docRef)
+
+  // if(docSnap.exists()) {
+  //   return docSnap.data()
+  // } else {
+  //   console.log('idk why');
     
-  }
+  // }
 
   // if(docSnap.exists()) {
   //   return docSnap.data()

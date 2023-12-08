@@ -11,20 +11,32 @@ export default function Cats(props: propsCats) {
 
 
   const email = useOutletContext()
-  const [cats, setCats] = useState([])
+  const [cats, setCats] = useState<any>([])
 
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         handleGetCats(user?.email).then((res) => {
-          setCats(res)
-          console.log(res);
-
+          
+          let tempCatArr:any = []
+          res.forEach((cat) => {
+            console.log(cat.data());
+            let dat = [...cats, cat.data()]
+            console.log(dat);
+            
+            setCats(dat)
+            // tempCatArr.push(dat)
+          })
+          setCats(tempCatArr)
+          console.log("CATS!!");
+          console.log(cats);
+          
         })
       }
     })
   }, [])
+
   // if (props.email) {
   //   handleGetCats(props.email).then((res) => {
   //     console.log(res);
@@ -39,9 +51,9 @@ export default function Cats(props: propsCats) {
   return (
     <div className="catPage">
       <h1>Cat dashboard</h1>
-      {cats.name}
-      {cats.colors}
-        {/* {
+      {/* {cats.name} */}
+      {/* {cats.colors} */}
+      {/* {
          cats.length !== 0 
         ? cats.map((cat) => {
           console.log(cat);
