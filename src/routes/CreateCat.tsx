@@ -3,6 +3,7 @@ import Color from "../components/Color"
 import { auth, handleCreateACat } from "../firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import { useLocation } from "react-router-dom"
+import '../styles/createCat.css'
 
 interface createCatProps {
   email:string,
@@ -55,10 +56,8 @@ export default function CreateCat(props: createCatProps) {
       <div className="createCatInputWrap">
         <p>Name</p>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        <h3>{name}</h3>
         <p>BirthDay</p>
         <input type="date" value={birthDay} onChange={(e) => setBirthDay(e.target.value) } />
-        <h3>{birthDay}</h3>
         <div className="colorsDiv">
           <p>Color(Can Enter multiple)</p>
           <input type="text" value={singleColor} onChange={(e) => setSingleColor(e.target.value)} onKeyDown={(e) => handleColors(e)} />
@@ -72,7 +71,6 @@ export default function CreateCat(props: createCatProps) {
         </div>
         <p>Eye color</p>
         <input type="text" value={eyeColor} onChange={(e) => setEyeColor(e.target.value)} />
-        <h3>{eyeColor}</h3>
         <p>Type of cat </p>
         {/* maybe create a custom select component */}
         <select name="catBreeds" value={type} onChange={(e) => setType(e.target.value)}>

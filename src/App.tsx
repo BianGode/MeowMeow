@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { auth, signOutFun } from "./firebase";
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { Link, Outlet, Route, Routes } from 'react-router-dom';
-import Cats from './routes/Cats';
-import CreateCat from './routes/CreateCat';
-import Login from './routes/Login';
-import Register from './routes/Register';
-import Home from './routes/Home';
+import './styles/global.css'
+import './styles/header.css'
+import Sidebar from './components/Sidebar';
 
-export default function App() {
+function App() {
   const [user, setUser] = useState<User | null>(null)
 
+  let UserContext: any = '';
   onAuthStateChanged(auth, (firebaseUser) => {
     setUser(firebaseUser)
+    UserContext = createContext(null)
   });
 
   // loader to navigate
@@ -29,21 +29,23 @@ export default function App() {
   // };
 
   return (
-    <div>
-      <h2>App</h2>
+    <header className='header'>
       {user !== null ?
-        <div className='navLogged'>
+        <>
           <Link to="cats">Cats</Link>
           <Link to='createcat' state={{ email: user.email }}>Create a Cat</Link>
-
-        </div>
-        : <div className='navNotLogged'>
+        </>
+        : <>
           <Link to="login">Login</Link>
           <Link to="register">register</Link>
-        </div>
+        </>
       }
-
-      <Outlet context={user?.email}/>
-    </div>
+      <UserContext.provider value={user?.email}>
+        <Sidebar />
+      </UserContext.provider>
+      <Outlet context={user?.email} />
+    </header>
   )
 }
+
+export default App

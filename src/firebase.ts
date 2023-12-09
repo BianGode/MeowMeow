@@ -84,19 +84,6 @@ async function handleGetCats(userEmail:string) {
   // const docRef = doc(db, "Cats", "users/" +userEmail)
   // const docSnap = await getDoc(docRef)
 
-  // if(docSnap.exists()) {
-  //   return docSnap.data()
-  // } else {
-  //   console.log('idk why');
-    
-  // }
-
-  // if(docSnap.exists()) {
-  //   return docSnap.data()
-  // } else {
-  //   console.log('no such document');
-    
-  // }
 }
 
 // Initialize Firebase
