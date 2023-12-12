@@ -70,6 +70,7 @@ async function handleCreateACat(userEmail:string, name:string, birthDay:string,c
 }
 
 // basic function to get all cats with email and push them to an temporary array to I can return them to Cats.tsx
+// EDIT: I want to get all the Cats in the collection `your@email.me`
 async function handleGetCats(userEmail:string) {
   
   const q = query(collection(db, "Cats/users/" + userEmail))
@@ -96,4 +97,3 @@ const db = getFirestore(app)
 export {auth, register, logIn, signOutFun, handleCreateACat, handleGetCats}
 
 // manage your cat via a dashboard
-// figure out how

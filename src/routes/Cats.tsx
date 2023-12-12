@@ -18,49 +18,34 @@ export default function Cats(props: propsCats) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         handleGetCats(user?.email).then((res) => {
-          
           let tempCatArr:any = []
           res.forEach((cat) => {
             console.log(cat.data());
             let dat = [...cats, cat.data()]
             console.log(dat);
             
-            setCats(dat)
-            // tempCatArr.push(dat)
+            setCats((oldCats: any) => [...oldCats, cat.data()])
+            tempCatArr.push(dat)
           })
-          setCats(tempCatArr)
-          console.log("CATS!!");
-          console.log(cats);
-          
+          // setCats(tempCatArr)
         })
       }
     })
   }, [])
-
-  // if (props.email) {
-  //   handleGetCats(props.email).then((res) => {
-  //     console.log(res);
-  //   })
-  // } else {
-  //   let email = getAuth().currentUser.email
-  //   handleGetCats().then((res) => {
-  //     console.log(res);
-  //   })
-  // }
 
   return (
     <div className="catPage">
       <h1>Cat dashboard</h1>
       {/* {cats.name} */}
       {/* {cats.colors} */}
-      {/* {
+      {
          cats.length !== 0 
         ? cats.map((cat) => {
           console.log(cat);
-          return <p>{cat}</p>
+          return <p>{cat.name}</p>
         })
         : <p>no cats</p>
-        } */}
+        }
     </div>
   )
 }
