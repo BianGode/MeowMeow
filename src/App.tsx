@@ -10,7 +10,7 @@ import { UserContext } from './UserContext';
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
-  
+
   const User = useContext(UserContext)
 
   onAuthStateChanged(auth, (firebaseUser) => {
@@ -44,13 +44,16 @@ function App() {
           <Link to="register">register</Link>
         </>
       }
-      <UserContext.Provider value={user?.email}>
+    </header>
+    {/* make a second header for mobile first */}
+    {/* <header>
+
+    </header> */}
+    <UserContext.Provider value={user?.email}>
         <Sidebar />
       </UserContext.Provider>
-
-    </header>
-      <Outlet context={user?.email} />
-      </>
+    <Outlet context={user?.email} />
+  </>
   )
 }
 
