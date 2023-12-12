@@ -46,9 +46,10 @@ function App() {
       }
     </header>
     {/* make a second header for mobile first */}
-    {/* <header>
-
-    </header> */}
+    <header>
+      <img src="./assets/burger-menu-svgrepo-com.svg" alt="hamburger" />
+      <h3>Logo</h3>
+    </header>
     <UserContext.Provider value={user?.email}>
         <Sidebar />
       </UserContext.Provider>
