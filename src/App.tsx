@@ -6,14 +6,15 @@ import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import './styles/global.css'
 import './styles/header.css'
 import Sidebar from './components/Sidebar';
+import { UserContext } from './UserContext';
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
+  
+  const User = useContext(UserContext)
 
-  let UserContext: any = '';
   onAuthStateChanged(auth, (firebaseUser) => {
     setUser(firebaseUser)
-    UserContext = createContext(null)
   });
 
   // loader to navigate
@@ -28,7 +29,10 @@ function App() {
   //   return null;
   // };
 
-  return (
+
+  // I want an updates or news page. Twitter like style
+
+  return (<>
     <header className='header'>
       {user !== null ?
         <>
@@ -40,11 +44,13 @@ function App() {
           <Link to="register">register</Link>
         </>
       }
-      <UserContext.provider value={user?.email}>
+      <UserContext.Provider value={user?.email}>
         <Sidebar />
-      </UserContext.provider>
-      <Outlet context={user?.email} />
+      </UserContext.Provider>
+
     </header>
+      <Outlet context={user?.email} />
+      </>
   )
 }
 

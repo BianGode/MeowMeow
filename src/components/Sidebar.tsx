@@ -1,16 +1,17 @@
 import { useContext } from "react"
 import { Link, useLocation } from "react-router-dom"
+import { UserContext } from "../UserContext"
 
-export default function Sidebar(context) {
+export default function Sidebar() {
 
-  // const email = useContext(UserContext)
+  const email = useContext(UserContext)
 
-  console.log(context);
-
+  console.log(email);
+  
   return (
     <div className="Sidebar">
       <Link to="cats">Cats</Link>
-      {/* <Link to='createcat' state={{ email: email }}>Create a Cat</Link> */}
+      <Link to='createcat'>Create a Cat</Link>
     </div>
   )
 }
