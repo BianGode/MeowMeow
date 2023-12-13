@@ -47,13 +47,7 @@ const signOutFun = async () => {
 } 
 
 // function to submit the cat to the database
-async function handleCreateACat(userEmail:string, name:string, birthDay:string,colorArray:string[], eyeColor:string, breed:string) {
-  console.log(userEmail);
-  console.log(name);
-  console.log(birthDay);
-  console.log(colorArray);
-  console.log(eyeColor);
-  console.log(breed);
+async function handleCreateACat(userEmail:string, name:string, birthDay:string, colorArray:string[], eyeColor:string, breed:string) {
   
     await setDoc(doc(db, "Cats", "users/" +userEmail + "/" + name), {
       name: name,

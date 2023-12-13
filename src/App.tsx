@@ -7,6 +7,9 @@ import './styles/global.css'
 import './styles/header.css'
 import Sidebar from './components/Sidebar';
 import { UserContext } from './UserContext';
+// import images and svg
+import Hamburger from './assets/hamburger.svg';
+import Cat from './assets/cat.png';
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
@@ -29,10 +32,17 @@ function App() {
   //   return null;
   // };
 
+  function handleMenu() {
+    const sideBarTarget = document.querySelector('.Sidebar')
+    const backdrop = document.querySelector('.backdrop')
+
+    sideBarTarget?.classList.toggle('on')
+    backdrop?.classList.toggle('on')
+  }
 
   // I want an updates or news page. Twitter like style
-
-  return (<>
+  return (
+  <>
     <header className='header'>
       {user !== null ?
         <>
@@ -46,14 +56,16 @@ function App() {
       }
     </header>
     {/* make a second header for mobile first */}
-    <header>
-      <img src="./assets/burger-menu-svgrepo-com.svg" alt="hamburger" />
+    <header className='mobHeader'>
+      <img src={Hamburger} onClick={() => handleMenu()} alt="hamburger" />
       <h3>Logo</h3>
+      <img src={Cat} alt="Profile" />
     </header>
     <UserContext.Provider value={user?.email}>
-        <Sidebar />
-      </UserContext.Provider>
+      <Sidebar />
+    </UserContext.Provider>
     <Outlet context={user?.email} />
+    <div className='backdrop'></div>
   </>
   )
 }
