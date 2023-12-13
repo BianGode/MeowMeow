@@ -1,14 +1,28 @@
-.Sidebar.on {
-  width: 60%;
-  display: block;
-}
-
 .Sidebar {
   display: none;
 }
 
-.backdrop {
-  width: 100%;
+.Sidebar.on {
+  width: 60%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  background-color: white;
+}
+.Sidebar.on > .sidebarTopWrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.Sidebar.on > .sidebarTopWrap .logo {
+  height: 80px;
+  width: auto;
+}
+.Sidebar.on > .sideLinks {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }/*# sourceMappingURL=sidebar.css.map */

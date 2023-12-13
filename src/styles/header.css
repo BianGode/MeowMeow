@@ -1,5 +1,6 @@
 @media only screen and (min-width: 1000px) {
   .header {
+    background-color: #ccc8aa;
     width: 100%;
     height: 80px;
     display: flex;
@@ -16,6 +17,7 @@
 }
 
 .mobHeader {
+  background-color: #ccc8aa;
   display: flex;
   width: 100%;
   height: 80px;
@@ -24,6 +26,10 @@
 }
 .mobHeader img {
   width: 50px;
+}
+.mobHeader .logo {
+  width: 80px;
+  height: 80px;
 }
 .mobHeader div {
   width: 50px;

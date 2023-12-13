@@ -1,9 +1,10 @@
-import { useState, KeyboardEvent } from "react"
+import { useState, KeyboardEvent, useContext } from "react"
 import Color from "../components/Color"
 import { auth, handleCreateACat } from "../firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import { useLocation } from "react-router-dom"
 import '../styles/createCat.css'
+import { UserContext } from "../UserContext"
 
 interface createCatProps {
   email:string,
@@ -13,9 +14,8 @@ export default function CreateCat(props: createCatProps) {
 
   // set the state props to local variable
   // side note = I still need to research if i have to assign it to a variable or state variable
-  let { state } = useLocation()
-  let email = state.email
-
+  const context = useContext(UserContext)
+  const email = context.email
 
   const [name, setName] = useState('')
   const [birthDay, setBirthDay] = useState<string>("2000-12-12")
@@ -49,6 +49,7 @@ export default function CreateCat(props: createCatProps) {
     }
   }
 
+  // Must: user must have the ability to add a picture
   
   return (
     <div className="createCatPage">

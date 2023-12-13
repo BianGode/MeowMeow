@@ -1,0 +1,24 @@
+.catPage {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+.catInfoSlide {
+  display: none;
+}
+.singeCatWrap {
+  border-bottom: 1px dashed #7D7C7C;
+  .catInfoSlide.on {
+    display: flex;
+    flex-direction: column;
+    .colorDiv {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      p {
+        background-color: #716b3e;
+        border-radius: 20px;
+        color: white;
+        padding: 10px 20px;
+      }
+    }
+  }
+}

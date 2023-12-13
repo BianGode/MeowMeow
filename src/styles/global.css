@@ -1,13 +1,32 @@
+@font-face {
+  font-family: headFont;
+  src: url("../assets/Sweetfy.ttf");
+}
+@font-face {
+  font-family: cleanFont;
+  src: url("../assets/Dosis-Medium.ttf");
+}
 * {
   box-sizing: border-box;
+  font-family: cleanFont;
+}
+
+h1 {
+  font-family: headFont;
+  text-align: center;
 }
 
 body {
   margin: 0;
+  background-color: #F1EFEF;
 }
-body .Sidebar {
+
+.backdrop.on {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
   left: 0;
-  width: 60%;
+  z-index: 5;
 }/*# sourceMappingURL=global.css.map */

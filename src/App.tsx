@@ -10,6 +10,7 @@ import { UserContext } from './UserContext';
 // import images and svg
 import Hamburger from './assets/hamburger.svg';
 import Cat from './assets/cat.png';
+import Logo from './assets/logo.png'
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
@@ -32,6 +33,7 @@ function App() {
   //   return null;
   // };
 
+  // function to handle hamburger menu
   function handleMenu() {
     const sideBarTarget = document.querySelector('.Sidebar')
     const backdrop = document.querySelector('.backdrop')
@@ -42,31 +44,32 @@ function App() {
 
   // I want an updates or news page. Twitter like style
   return (
-  <>
-    <header className='header'>
-      {user !== null ?
-        <>
-          <Link to="cats">Cats</Link>
-          <Link to='createcat' state={{ email: user.email }}>Create a Cat</Link>
-        </>
-        : <>
-          <Link to="login">Login</Link>
-          <Link to="register">register</Link>
-        </>
-      }
-    </header>
-    {/* make a second header for mobile first */}
-    <header className='mobHeader'>
-      <img src={Hamburger} onClick={() => handleMenu()} alt="hamburger" />
-      <h3>Logo</h3>
-      <img src={Cat} alt="Profile" />
-    </header>
-    <UserContext.Provider value={user?.email}>
-      <Sidebar />
-    </UserContext.Provider>
-    <Outlet context={user?.email} />
-    <div className='backdrop'></div>
-  </>
+    <>
+      <header className='header'>
+        {user !== null ?
+          <>
+            <Link to="cats">Cats</Link>
+            <Link to='createcat' state={{ email: user.email }}>Create a Cat</Link>
+          </>
+          : <>
+            <Link to="login">Login</Link>
+            <Link to="register">register</Link>
+          </>
+        }
+      </header>
+      {/* make a second header for mobile first */}
+      <header className='mobHeader'>
+        <img src={Hamburger} onClick={() => handleMenu()} alt="hamburger" />
+        <img src={Logo} className='logo' alt="Logo" />
+        <img src={Cat} alt="Profile" />
+      </header>
+      <UserContext.Provider value={{email: user?.email, fun: () => handleMenu()}}>
+        <Sidebar/>
+        <Outlet context={user?.email} />
+      </UserContext.Provider>
+
+      <div className='backdrop'></div>
+    </>
   )
 }
 
