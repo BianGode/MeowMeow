@@ -9,6 +9,11 @@
 .singeCatWrap {
   border-bottom: 1px dashed #7D7C7C;
 }
+.singeCatWrap .singleCatHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .singeCatWrap .catInfoSlide.on {
   display: flex;
   flex-direction: column;

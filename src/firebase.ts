@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut} from 'firebase/auth';
 import { redirect } from "react-router-dom";
-import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, deleteDoc ,getDocs, getFirestore, query, setDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -83,6 +83,26 @@ async function handleGetCats(userEmail:string) {
 
 }
 
+// delete a cat from firebase function 
+async function deleteCat(userEmail:string, name:string) {
+  await deleteDoc(doc(db, "Cats", "users/" +userEmail + "/" + name))
+  .then(() => {
+    console.log('delete succesfully');
+  }).catch((err) => {
+    console.log(err);
+    
+  })
+  
+}
+
+function logOut() {
+  signOut(auth).then(() => {
+    console.log('Signed out!')
+  }).catch((err) => {
+    console.log(err);
+  })
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -90,6 +110,6 @@ const auth = getAuth(app);
 // firestore db
 const db = getFirestore(app)
 
-export {auth, register, logIn, signOutFun, handleCreateACat, handleGetCats}
+export {auth, register, logIn, signOutFun, handleCreateACat, handleGetCats, deleteCat, logOut}
 
 // manage your cat via a dashboard

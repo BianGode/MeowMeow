@@ -16,6 +16,11 @@ export default function CreateCat(props: createCatProps) {
   // side note = I still need to research if i have to assign it to a variable or state variable
   const context = useContext(UserContext)
   const email = context.email
+  const fun = context.fun
+
+  if(document.querySelector('.Sidebar')?.classList.contains('on')) {
+    fun()
+  }
 
   const [name, setName] = useState('')
   const [birthDay, setBirthDay] = useState<string>("2000-12-12")

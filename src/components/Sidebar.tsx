@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { UserContext } from "../UserContext"
 import '../styles/sidebar.css'
 import Logo from '../assets/logo.png'
+import { logOut } from "../firebase"
 
 export default function Sidebar() {
 
@@ -21,6 +22,7 @@ export default function Sidebar() {
         <Link to="cats">Cats</Link>
         <Link to='createcat'>Create a Cat</Link>
       </div>
+      <button onClick={() => logOut()}>Sign out!</button>
     </div>
   )
 }

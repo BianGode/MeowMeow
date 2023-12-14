@@ -6,6 +6,11 @@
 }
 .singeCatWrap {
   border-bottom: 1px dashed #7D7C7C;
+  .singleCatHead {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
   .catInfoSlide.on {
     display: flex;
     flex-direction: column;
