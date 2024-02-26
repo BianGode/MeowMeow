@@ -13,13 +13,16 @@ import Cat from './assets/cat.png';
 import Logo from './assets/logo.png'
 
 function App() {
-  const [user, setUser] = useState<User | null>(null)
-
-  const User = useContext(UserContext)
+  const [user, setUser] = useState<any | null>(null)
 
   onAuthStateChanged(auth, (firebaseUser) => {
     setUser(firebaseUser)
   });
+
+  interface contextData {
+    email: string;
+    fun: () => void;
+  }
 
   // loader to navigate
   // const navigate = useNavigate();
