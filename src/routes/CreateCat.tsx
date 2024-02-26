@@ -14,12 +14,11 @@ export default function CreateCat(props: createCatProps) {
 
   // set the state props to local variable
   // side note = I still need to research if i have to assign it to a variable or state variable
-  const { email, fun } = useContext(UserContext)
-  if (!context) {
+  const {email, fun} = useContext(UserContext)
+  if (!email) {
     throw Error("useAuthContext can only be used inside an AuthProvider");
   } else {
-    const email = context.email
-    const fun = context.fun
+
   }
 
   if (document.querySelector('.Sidebar')?.classList.contains('on')) {

@@ -6,7 +6,7 @@ import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import './styles/global.css'
 import './styles/header.css'
 import Sidebar from './components/Sidebar';
-import { UserContext } from './UserContext';
+import { UserContext, contextData } from './UserContext';
 // import images and svg
 import Hamburger from './assets/hamburger.svg';
 import Cat from './assets/cat.png';
@@ -19,10 +19,6 @@ function App() {
     setUser(firebaseUser)
   });
 
-  interface contextData {
-    email: string;
-    fun: () => void;
-  }
 
   // loader to navigate
   // const navigate = useNavigate();
@@ -66,8 +62,8 @@ function App() {
         <img src={Logo} className='logo' alt="Logo" />
         <img src={Cat} alt="Profile" />
       </header>
-      <UserContext.Provider value={{email: user?.email, fun: () => handleMenu()}}>
-        <Sidebar/>
+      <UserContext.Provider value={{ email: user?.email, fun: () => handleMenu() }}>
+        <Sidebar />
         <Outlet context={user?.email} />
       </UserContext.Provider>
 
